@@ -1,0 +1,14 @@
+{% extends "bookmarks/base.html" %}
+{% block title %}
+    User Registration
+{% endblock title %}
+{% block head %}
+    User Registration
+{% endblock head %}
+{% block content %}
+    <form method="post" action=".">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <input type="submit" value="register" />
+    </form>
+{% endblock content %}

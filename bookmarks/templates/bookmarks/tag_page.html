@@ -1,0 +1,10 @@
+{% extends "bookmarks/base.html" %}
+{% block title %}
+    Tag: {{ tag_name|escape }}
+{% endblock title %}
+{% block head %}
+    Bookmark for tag: {{ tag_name|escape }}
+{% endblock head %}
+{% block content %}
+    {% include "bookmarks/bookmark_list.html" %}
+{% endblock content %}

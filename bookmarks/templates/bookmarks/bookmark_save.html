@@ -1,0 +1,16 @@
+{% extends "bookmarks/base.html" %}
+{% load staticfiles %}
+{% block external %}
+    <link rel="stylesheet" type="text/css" href="{% static "bookmarks/css/jquery-ui.css" %}">
+    <script type="text/javascript" src="{% static "bookmarks/js/jquery-ui.js" %}"></script>
+    <script type="text/javascript" src="{% static "bookmarks/js/tag_autocomplete.js" %}"></script>
+{% endblock external %}
+{% block title %}
+    Save Bookmark
+{% endblock title %}
+{% block head %}
+    Save Bookmark
+{% endblock head %}
+{% block content %}
+    {% include "bookmarks/bookmark_save_form.html" %}
+{% endblock content %}

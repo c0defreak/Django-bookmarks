@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django Bookmarks | {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static "bookmarks/css/style.css" %}">
+    <script type="text/javascript" src="{% static "bookmarks/js/jquery.js" %}"></script>
+    {% block external %}
+    {% endblock external %}
+</head>
+<body>
+    <div id="nav">
+        <a href="/">Home</a> | 
+        <a href="/popular/">Popular</a> |
+        {% if user.is_authenticated %}
+            <a href="/save/">submit</a> |
+            <a href="/search/">search</a> |
+            <a href="/user/{{ user.username }}">{{ user.username }}</a> |
+            <a href="/logout">logout</a>
+        {% else %}
+            <a href="/login/">login</a> |
+            <a href="/register/">register</a>
+        {% endif %}
+    </div>
+    <h1>{% block head %}{% endblock head %}</h1>
+    {% block content %}
+        
+    {% endblock content %}
+</body>
+</html>
