@@ -1,8 +1,8 @@
 # DJANGO BOOKMARKS
 from the book **Learning website developement with django**
 Features:
-* Added Bootstrap -- TODO
-* Ported to Django 1.8
+* - [ ] Added Bootstrap3 -- TODO
+* - [x] Ported to Django 1.8
 
 ### Install
 ```bash
