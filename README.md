@@ -1,7 +1,7 @@
 # DJANGO BOOKMARKS
 from the book **Learning website developement with django**
 Features:
-> - [ ] Added Bootstrap3 -- TODO
+> - [ ] Added Bootstrap3 -- Partial
 > - [x] Ported to Django 1.8
 > - [x] Modified Comment Section 
 > - [x] Modified Login Section
