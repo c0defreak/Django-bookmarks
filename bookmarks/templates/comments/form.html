@@ -1,3 +1,4 @@
+{% load comments %}
 {% if user.is_authenticated %}
 <form action="/comments/post/" method="post">
 {% csrf_token %}

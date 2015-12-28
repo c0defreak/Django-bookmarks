@@ -2,7 +2,7 @@ import json
 from datetime import datetime, timedelta
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse, Http404
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -266,9 +266,9 @@ def bookmark_vote_page(request):
 
 def popular_page(request):
     today = datetime.today()
-    yesterday = today - timedelta(1)
+    day = today - timedelta(10)
     shared_bookmarks = SharedBookmark.objects.filter(
-        date__gt=yesterday
+        date__gt=day
         )
     shared_bookmarks = shared_bookmarks.order_by(
         '-votes'
@@ -330,3 +330,42 @@ def friend_add(request):
         )
     else:
         raise Http404
+
+
+def posted_page(request, id):
+    try:
+        shared_bookmark = SharedBookmark.objects.get(id=id)
+    except ObjectDoesNotExist:
+        raise Http404('Object does not exist')
+    variables = {
+        'shared_bookmark': shared_bookmark
+    }
+    return render(request, 'bookmarks/posted.html', context=variables)
+
+
+def login_page(request):
+    state = "Please Log in Below"
+    next = ""
+    if request.GET:
+        next = request.GET['next']
+    if request.POST:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                state = "log in successful"
+                if next == "":
+                    return HttpResponseRedirect('/')
+                else:
+                    return HttpResponseRedirect(next)
+            else:
+                state = "Your Account is not active"
+        else:
+            state = "username or password incorrect"
+    variables = {
+        'state': state,
+        'next': next
+    }
+    return render(request, 'bookmarks/login.html', context=variables)

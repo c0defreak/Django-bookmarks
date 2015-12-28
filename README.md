@@ -3,6 +3,9 @@ from the book **Learning website developement with django**
 Features:
 > - [ ] Added Bootstrap3 -- TODO
 > - [x] Ported to Django 1.8
+> - [x] Modified Comment Section 
+> - [x] Modified Login Section
+> - [x] Modified tag autocomplete section as jqueryUi autocomplete is used
 
 ### Install
 ```bash

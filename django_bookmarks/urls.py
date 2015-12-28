@@ -33,9 +33,10 @@ urlpatterns = [
     url(r'^search/$', search_page),
     url(r'^popular/$', popular_page),
     url(r'^bookmark/(\d+)/$', bookmark_page),
+    url(r'^posted/(\d+)/$', posted_page),
 
     # session management
-    url(r'^login/$', 'django.contrib.auth.views.login'),
+    url(r'^login/$', login_page),  # 'django.contrib.auth.views.login'
     url(r'^logout/$', logout_page),
     url(r'^register/$', register_page),
     url(r'^register/success/$', TemplateView.as_view(template_name='registration/register_success.html')),

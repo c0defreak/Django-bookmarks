@@ -7,7 +7,7 @@
 {% endblock head %}
 {% block content %}
     <p>Thank you for contributing.</p>
-    {% if object %}
-        <p><a href="/bookmark/{{ object.id }}/">View Your comment</a></p>
+    {% if shared_bookmark %}
+        <p><a href="/bookmark/{{ shared_bookmark.id }}/">View Your comment</a></p>
     {% endif %}
 {% endblock content %}

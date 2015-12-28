@@ -1,0 +1,21 @@
+{% extends "bookmarks/base.html" %}
+{% block title %}
+    Login Page
+{% endblock title %}
+{% block head %}
+    {{ state }}
+{% endblock head %}
+{% block content %}
+    {% if next %}
+    <form action="/login/?next={{ next }}" method="post">
+    {% else %}
+    <form action="/login/" method="post">
+    {% endif %}
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input type="text" name="username" value=""> <br />
+        <label for="password">Password</label>
+        <input type="password" name="password" value=""> <br />
+        <input type="submit" value="Log In">
+    </form>
+{% endblock content %}

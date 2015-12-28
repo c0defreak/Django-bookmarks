@@ -1,30 +1,58 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Django Bookmarks | {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static "bookmarks/css/bootstrap.min.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "bookmarks/css/style.css" %}">
     <script type="text/javascript" src="{% static "bookmarks/js/jquery.js" %}"></script>
+    <script type="text/javascript" src="{% static "bookmarks/js/bootstrap.min.js" %}"></script>
     {% block external %}
     {% endblock external %}
 </head>
 <body>
-    <div id="nav">
-        <a href="/">Home</a> | 
-        <a href="/popular/">Popular</a> |
-        {% if user.is_authenticated %}
-            <a href="/save/">submit</a> |
-            <a href="/search/">search</a> |
-            <a href="/user/{{ user.username }}">{{ user.username }}</a> |
-            <a href="/logout">logout</a>
-        {% else %}
-            <a href="/login/">login</a> |
-            <a href="/register/">register</a>
-        {% endif %}
-    </div>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#NavBar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span> Home</a>
+            </div>
+            <div class="collapse navbar-collapse" id="NavBar">
+                <ul class="nav navbar-nav">
+                    <li><a href="/popular/">Popular</a></li>
+                </ul>
+                    {% if user.is_authenticated %}
+                    <ul class="nav navbar-nav">    <li><a href="/save/">Submit</a></li>
+                        <li><a href="/search/">Search</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/user/{{ user.username }}">{{ user.username }}</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                    {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/login/?next={{ request.path }}"><span class="glyphicon glyphicon-log-in"></span> Sign In</a></li>
+                        <li><a href="/register/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    </ul>
+                    {% endif %}
+            </div>
+        </div>
+    </nav>
+{% block jumbo %}
+    
+{% endblock jumbo %}
+<div class="container-fluid">
     <h1>{% block head %}{% endblock head %}</h1>
     {% block content %}
         
     {% endblock content %}
+</div>
 </body>
 </html>
