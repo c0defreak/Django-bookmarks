@@ -1,19 +1,38 @@
 {% extends "bookmarks/base.html" %}
 {% block title %}
-    User Login
+    Login Page
 {% endblock title %}
-{% block head %}
-    User Login
-{% endblock head %}
+{% block external %}
+    <style type="text/css">
+        .wrapper {
+            margin-top:80px ;
+        }
+
+        .form-signin {
+            max-width: 380px;
+            padding: 15px 35px 45px;
+            margin: 0 auto;
+        }
+
+        .form-signin-heading {
+            margin-bottom: 30px;
+        }
+    </style>
+{% endblock external %}
 {% block content %}
-    {% if form.has_errors %}
-        <p>Your username and password didn't match.please try again.</p>
+<div class="wrapper">
+    {% if next %}
+    <form class="form-signin" action="/login/?next={{ next }}" method="post">
+    {% else %}
+    <form class="form-signin" action="/login/" method="post">
     {% endif %}
-    <form method="post" action=".">
         {% csrf_token %}
-        <p><label for="id_username">Username:</label>{{ form.username }}</p>
-        <p><label for="id_password">Password:</label>{{ form.password }}</p>
-        <input type="submit" value="login" />
-        <input type="hidden" name="next" value="/" />
+        <h2 class="form-signin-heading">{{ state }}</h2>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" name="username" value="" class="form-control" placeholder="User Name" required autofocus> <br />
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" name="password" value="" class="form-control" placeholder="Password" required> <br />
+        <button class="btn btn-primary btn-lg" type="submit">Sign In</button>
     </form>
-{% endblock content%}
+</div>
+{% endblock content %}

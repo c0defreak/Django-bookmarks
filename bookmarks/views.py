@@ -27,6 +27,7 @@ def main_page(request):
     return render(request, 'bookmarks/main_page.html', context=variables)
 
 
+@login_required(login_url='/login/')
 def user_page(request, username):
     user = get_object_or_404(User, username=username)
     query_set = user.bookmark_set.order_by('-id')
@@ -368,4 +369,4 @@ def login_page(request):
         'state': state,
         'next': next
     }
-    return render(request, 'bookmarks/login.html', context=variables)
+    return render(request, 'registration/login.html', context=variables)
