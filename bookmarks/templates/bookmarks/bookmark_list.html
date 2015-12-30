@@ -1,7 +1,7 @@
 {% if bookmarks %}
-    <ul class="bookmarks">
+    <ul class="bookmarks list-group">
         {% for bookmark in bookmarks %}
-            <li>
+            <li class="list-group-item">
                 <a href="{{ bookmark.link.url|escape }}" class="title">{{ bookmark.title|escape }}</a>
                 {% if show_edit %}
                     <a href="/save/?url={{ bookmark.link.url|urlencode }}" class="edit">[edit]</a>
@@ -10,9 +10,9 @@
                 {% if show_tags %}
                     Tags:
                     {% if bookmark.tag_set.all %}
-                        <ul class="tags">
+                        <ul class="tags list-group">
                         {% for tag in bookmark.tag_set.all %}
-                        <li>
+                        <li class="list-group-item">
                             <a href="/tag/{{ tag.name|urlencode }}/">{{ tag.name|escape }}</a>
                         </li>
                         {% endfor %}

@@ -1,16 +1,16 @@
 {% extends "bookmarks/base.html" %}
 {% block title %}
-    Friends for {{ username }}
+    Friends of {{ username }}
 {% endblock title %}
 {% block head %}
-    Friends for {{ username }}
+    Friends of {{ username }}
 {% endblock head %}
 {% block content %}
     <h2>Friend List</h2>
     {% if friends %}
-        <ul class="friends">
+        <ul class="friends list-group">
             {% for friend in friends %}
-                <li><a href="/user/{{ friend.username }}">{{ friend.username }}</a></li>
+                <li class="list-group-item"><a href="/user/{{ friend.username }}">{{ friend.username }}</a></li>
             {% endfor %}
         </ul>
     {% else %}

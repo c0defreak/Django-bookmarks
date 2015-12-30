@@ -2,12 +2,17 @@
 {% load staticfiles %}
 {% block external %}
     <script type="text/javascript" src="{% static "bookmarks/js/bookmark_edit.js" %}"></script>
+    <style type="text/css">
+        .wrapper {
+            margin-top: 20px;
+        }
+    </style>
 {% endblock external %}
 {% block title %}{{ username }}{% endblock %}
 {% block head %}Bookmarks for {{ username }}{% endblock %}
 {% block content %}
     {% ifequal user.username username %} 
-        <a href="/friends/{{ username }}/">view your friends</a>
+        <a href="/friends/{{ username }}/">view your friends bookmarks</a>
     {% else %}
         {% if is_friend %}
             <a href="/friends/{{ user.username }}/">{{ username }} is a friend of yours</a>
@@ -18,5 +23,7 @@
             view {{ username }}'s friends
             </a>
     {% endifequal %}
+    <div class="wrapper">
     {% include "bookmarks/bookmark_list.html" %}
+    </div>
 {% endblock %}

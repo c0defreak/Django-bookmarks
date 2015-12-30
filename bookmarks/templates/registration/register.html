@@ -1,14 +1,53 @@
 {% extends "bookmarks/base.html" %}
+{% load widget_tweaks %}
 {% block title %}
     User Registration
 {% endblock title %}
-{% block head %}
-    User Registration
-{% endblock head %}
+{% block external %}
+    <style type="text/css">
+        .wrapper {
+            margin-top: 50px;
+        }
+
+        .form-horizontal {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+    </style>
+{% endblock external %}
 {% block content %}
-    <form method="post" action=".">
+<h2>User Registration</h2>
+<div class="wrapper">
+    <form class="form-horizontal" method="post" action=".">
         {% csrf_token %}
-        {{ form.as_p }}
-    <input type="submit" value="register" />
+        {% for field in form %}
+            {% if field.errors %}
+                <div class="form-group has-error">
+                    <label class="col-sm-4 control-label" for=id_{{ field.name }}> {{ field.label }}</label>
+                    <div class="col-sm-8">
+                        {{ field|add_class:"form-control" }}
+                        <span class="help-block">
+                            {% for error in field.errors %}{{ error }}{% endfor %}
+                        </span>
+                    </div>
+                </div>   
+            {% else %}
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for=id_{{ field.name }}>{{ field.label }}</label>
+                    <div class="col-sm-8">
+                        {{ field|add_class:"form-control" }}
+                        {% if field.help_text %}
+                            <p class="help-block"><small>{{ field.help_text }}</small></p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+        </div>
     </form>
+</div>
 {% endblock content %}

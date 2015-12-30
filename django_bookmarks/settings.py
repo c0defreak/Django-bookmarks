@@ -39,6 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_comments',
+    'widget_tweaks',
+    'crispy_forms',
     'bookmarks'
 )
 
@@ -105,3 +107,5 @@ USE_TZ = False
 STATIC_URL = '/static/'
 
 SITE_ID = 1
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

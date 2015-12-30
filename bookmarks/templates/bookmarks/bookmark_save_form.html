@@ -1,5 +1,8 @@
-<form id="save-form" method="post" action="/save/">
+{% load crispy_forms_tags %}
+<form id="save-form" method="post" action="/save/"  class="form-horizontal">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="save" />
+        {{ form|crispy }}
+        <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+        </div>
 </form>

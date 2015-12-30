@@ -131,7 +131,15 @@ def bookmark_save_page(request):
 
 def tag_page(request, tag_name):
     tag = get_object_or_404(Tag, name=tag_name)
-    bookmarks = tag.bookmarks.order_by('-id')
+    query_set = tag.bookmarks.order_by('-id')
+    paginator = Paginator(query_set, ITEMS_PER_PAGE)
+    page = request.GET.get('page')
+    try:
+        bookmarks = paginator.page(page)
+    except PageNotAnInteger:
+        bookmarks = paginator.page(1)
+    except EmptyPage:
+        bookmarks = paginator.page(paginator.num_pages)
     variables = {
         'bookmarks': bookmarks,
         'tag_name': tag_name,
@@ -180,7 +188,15 @@ def search_page(request):
             for keyword in keywords:
                 q = q & Q(title__icontains=keyword)
             form = SearchForm({'query': query})
-            bookmarks = Bookmark.objects.filter(q)[:10]
+            query_set = Bookmark.objects.filter(q)[:10]
+            paginator = Paginator(query_set, ITEMS_PER_PAGE)
+            page = request.GET.get('page')
+            try:
+                bookmarks = paginator.page(page)
+            except PageNotAnInteger:
+                bookmarks = paginator.page(1)
+            except EmptyPage:
+                bookmarks = paginator.page(paginator.num_pages)
     variables = {
         'form': form,
         'bookmarks': bookmarks,

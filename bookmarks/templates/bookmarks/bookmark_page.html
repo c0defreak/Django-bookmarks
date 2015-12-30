@@ -1,9 +1,16 @@
 {% extends "bookmarks/base.html" %}
+{% load widget_tweaks %}
 {% load comments %}
 {% block external %}
     <style type="text/css">
         #id_honeypot{
             display: none;
+        }
+        .form-horizontal {
+            max-width: 500px;
+        }
+        .comment {
+            margin: 10px;
         }
     </style>
 {% endblock external %}
@@ -29,16 +36,20 @@
     <p>Number of comments: {{ comment_count }}</p>
     {% if user.is_authenticated %}
         {% get_comment_form for bookmarks.sharedbookmark shared_bookmark.id as form %}
-        <form action="{% comment_form_target %}" method="POST">
+        <form action="{% comment_form_target %}" method="POST" class="form-horizontal">
             {% csrf_token %}
-            {{ form.comment }}
+            <div class="form-group">
+                {{ form.comment|add_class:"form-control" }}
+            </div>
             {{ form.honeypot }}
             {{ form.content_type }}
             {{ form.object_pk }}
             {{ form.timestamp }}
             {{ form.security_hash }}
             <input type="hidden" name="next" value="/posted/{{ shared_bookmark.id }}/" />
-            <input type="submit" value="Add comment" id="id_submit" />
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </form>
     {% else %}
         <p>Please <a href="/login/?next={{ request.path }}">Login</a> to comment</p>

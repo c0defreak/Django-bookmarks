@@ -22,7 +22,7 @@ class RegistrationForm(forms.Form):
             password2 = self.cleaned_data['password2']
             if password1 == password2:
                 return password2
-        raise forms.ValidationError('PassWords Do not match')
+        raise forms.ValidationError('Passwords do not match')
 
     def clean_username(self):
         username = self.cleaned_data['username']

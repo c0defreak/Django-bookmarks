@@ -1,7 +1,12 @@
 {% extends "bookmarks/base.html" %}
-{% load staticfiles %}
+{% load staticfiles crispy_forms_tags %}
 {% block external %}
     <script type="text/javascript" src="{% static "bookmarks/js/search.js" %}"></script>
+    <style type="text/css">
+        #search-results {
+            margin-top: 20px;
+        }
+    </style>
 {% endblock external %}
 {% block title %}
     Search Bookmarks
@@ -11,8 +16,8 @@
 {% endblock head %}
 {% block content %}
     <form id="search-form" method="get" action=".">
-        {{ form.as_p }}
-        <input type="submit" value="search" />
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
     <div id="search-results">
         {% if show_results %}
