@@ -1,5 +1,6 @@
 # DJANGO BOOKMARKS
-from the book **Learning website developement with django** [demo](http://codefreak.pythonanywhere.com)
+from the book **Learning website developement with django** [Demo](http://codefreak.pythonanywhere.com)
+
 Features:
 > - [x] Added Bootstrap3
 > - [x] Ported to Django 1.8
